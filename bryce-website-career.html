@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bryce Gardner — Data Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #1B3A5C;
+      --teal:    #2A7F7F;
+      --slate:   #2D3E50;
+      --lblue:   #D6E8F0;
+      --offwhite:#F7FAFB;
+      --mid:     #6B8CA8;
+      --text:    #1a2533;
+      --muted:   #5a7080;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--offwhite);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      color: #fff;
+      font-size: 1.1rem;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--lblue);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 60%, #1a4a6e 100%);
+      color: #fff;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 110%, rgba(42,127,127,0.28) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--lblue);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.78);
+      max-width: 560px;
+      margin: 0 auto 2.2rem;
+      font-weight: 300;
+      position: relative;
+    }
+    .hero-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
+    .btn-primary  { background: var(--teal); color: #fff; }
+    .btn-resume   { background: #fff; color: var(--navy); }
+    .btn-ghost    { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.4); }
+    .btn-ghost:hover { border-color: #fff; }
+
+    /* ── STAT STRIP ── */
+    .stats {
+      background: var(--lblue);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .stat {
+      padding: 1.4rem 2.5rem;
+      text-align: center;
+      border-right: 1px solid rgba(27,58,92,0.12);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      display: block;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1;
+      transition: all 0.3s;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 4rem 2rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      color: var(--navy);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .section-body {
+      color: var(--muted);
+      max-width: 640px;
+      font-size: 0.97rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: #fff; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+    .about-text p { color: var(--muted); font-size: 0.96rem; margin-bottom: 1rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .credentials { display: flex; flex-direction: column; gap: 1rem; }
+    .credential {
+      background: var(--offwhite);
+      border-left: 3px solid var(--teal);
+      padding: 0.9rem 1.1rem;
+      border-radius: 0 4px 4px 0;
+    }
+    .credential-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .credential-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--offwhite); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .skill-card {
+      background: #fff;
+      border: 1px solid #e0eaf0;
+      border-radius: 6px;
+      padding: 1.25rem;
+    }
+    .skill-card-icon { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .skill-card h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+    .skill-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── PROJECTS ── */
+    #projects { background: #fff; }
+    .projects-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .projects-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .projects-meta a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+    .projects-meta a:hover { text-decoration: underline; }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* skeleton loader */
+    .skeleton {
+      background: linear-gradient(90deg, #e8f0f5 25%, #d6e4ed 50%, #e8f0f5 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 4px;
+      height: 14px;
+      margin-bottom: 0.5rem;
+    }
+    .skeleton.tall  { height: 60px; }
+    .skeleton.short { width: 60%; }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .project-card-skeleton {
+      border: 1px solid #dce8f0;
+      border-radius: 8px;
+      padding: 1.4rem;
+      background: var(--offwhite);
+    }
+
+    .project-card {
+      border: 1px solid #dce8f0;
+      border-radius: 8px;
+      padding: 1.4rem;
+      background: var(--offwhite);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .project-card:hover {
+      box-shadow: 0 6px 24px rgba(27,58,92,0.1);
+      transform: translateY(-2px);
+    }
+    .project-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+    .project-card p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      flex: 1;
+      font-style: italic;
+    }
+    .project-card p.has-desc { font-style: normal; }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.2rem;
+    }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+      background: #e4eef6;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+    }
+    .tag-lang {
+      background: var(--lblue);
+      color: var(--slate);
+    }
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .project-links a {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--teal);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+    .project-links a:hover { color: var(--navy); text-decoration: underline; }
+
+    .projects-error {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 2rem;
+      background: var(--offwhite);
+      border-radius: 8px;
+      border: 1px dashed #c0d8e8;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--offwhite); }
+    .timeline { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .tl-dates {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--mid);
+      text-align: right;
+      padding-top: 0.15rem;
+      line-height: 1.4;
+    }
+    .tl-content {
+      border-left: 2px solid var(--lblue);
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .tl-content::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+    .tl-role  { font-weight: 600; color: var(--navy); font-size: 0.95rem; }
+    .tl-org   { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; }
+    .tl-desc  { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+    }
+    #contact .section-label { color: var(--teal); }
+    #contact .section-title { color: #fff; }
+    #contact .section-body  { color: rgba(255,255,255,0.65); margin: 0 auto 2rem; }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--lblue);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid rgba(214,232,240,0.3);
+      border-radius: 4px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .contact-link:hover {
+      background: rgba(42,127,127,0.3);
+      border-color: var(--teal);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111d27;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      font-size: 0.75rem;
+      padding: 1.2rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .tl-item    { grid-template-columns: 1fr; gap: 0.25rem; }
+      .tl-dates   { text-align: left; }
+      .nav-links  { display: none; }
+      .stats      { flex-direction: column; align-items: stretch; }
+      .stat       { border-right: none; border-bottom: 1px solid rgba(27,58,92,0.12); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Bryce Gardner</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Data Analyst · Atlanta, GA</p>
+  <h1>Turning raw data into<br><em>decisions that matter</em></h1>
+  <p class="hero-sub">
+    I build end-to-end analytics pipelines — from messy CSV to interactive Tableau dashboard — and translate findings into plain-language business insight.
+  </p>
+  <div class="hero-links">
+    <a href="#projects" class="btn btn-primary">View My Work</a>
+    <!--
+      RESUME BUTTON: Once you upload your resume PDF to GitHub, replace the href below.
+      Typical raw URL format:
+      https://raw.githubusercontent.com/brycegardner90/YOUR-REPO-NAME/main/bryce-gardner-resume.pdf
+    -->
+    <a href="#" id="resume-btn" class="btn btn-resume" download>⬇ Download Resume</a>
+    <a href="https://public.tableau.com/app/profile/bryce.gardner" target="_blank" rel="noopener" class="btn btn-ghost">Tableau Public ↗</a>
+    <a href="https://github.com/brycegardner90" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<div class="stats">
+  <div class="stat">
+    <span class="stat-num" id="stat-repos">—</span>
+    <span class="stat-label">GitHub Repos</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">1M+</span>
+    <span class="stat-label">Records Analyzed</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">4</span>
+    <span class="stat-label">Tools: Python · SQL · Tableau · Power BI</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">3.91</span>
+    <span class="stat-label">GPA · Summa Cum Laude · UGA</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">Analyst with a business-first mindset</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I hold a BBA from the University of Georgia (3.91 GPA, Summa Cum Laude) and a Google Data Analytics Certificate, and I've spent the past few years building a full analytics portfolio from scratch — no tutorials, just real datasets and real questions.
+        </p>
+        <p>
+          My background in operations management gave me a feel for what business stakeholders actually need from data: not just what happened, but why it happened and what to do about it. I write up every project with that lens — findings and recommendations, not just charts.
+        </p>
+        <p>
+          I work across the full pipeline: Python for cleaning and analysis, SQLite for structured querying, and Tableau or Power BI for visualization. Every project is documented on GitHub with clean code and a published dashboard.
+        </p>
+      </div>
+      <div class="credentials">
+        <div class="credential">
+          <div class="credential-title">BBA General Business — Summa Cum Laude</div>
+          <div class="credential-meta">University of Georgia, Athens · May 2020 · GPA 3.91</div>
+        </div>
+        <div class="credential">
+          <div class="credential-title">AS Business</div>
+          <div class="credential-meta">Georgia State University Perimeter College · Dec 2016</div>
+        </div>
+        <div class="credential">
+          <div class="credential-title">Google Data Analytics Certificate</div>
+          <div class="credential-meta">Google / Coursera · June 2023 · 7-course program</div>
+        </div>
+        <div class="credential">
+          <div class="credential-title">Relevant Coursework</div>
+          <div class="credential-meta">Statistical Analysis for Business · Financial Modeling · Financial Report &amp; Analysis · Operations Management · Financial Management</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label">Technical Skills</p>
+    <h2 class="section-title">Tools I reach for every project</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon">🐍</div>
+        <h4>Python</h4>
+        <p>pandas for cleaning and transformation; structured scripts numbered by pipeline stage (01 explore → 06 export)</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🗃️</div>
+        <h4>SQL &amp; SQLite</h4>
+        <p>Business query writing, database loading, DB Browser for SQLite; every project runs SQL before visualization</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📊</div>
+        <h4>Tableau</h4>
+        <p>Interactive dashboards published to Tableau Public; multi-view layouts with KPI cards, filters, and calculated fields</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📈</div>
+        <h4>Power BI</h4>
+        <p>DAX measures and report design used across NFL analysis, Atlanta economic growth, and video game sales projects</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📋</div>
+        <h4>Excel &amp; Sheets</h4>
+        <p>Financial modeling, restaurant industry analysis in Google Sheets; Excel inventory management in prior operations roles</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🔗</div>
+        <h4>GitHub &amp; APIs</h4>
+        <p>Public repos with READMEs, screenshots, and dashboard links; live API pipeline built on Bungie's Destiny 2 API</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="projects-header">
+      <div>
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title" style="margin-bottom:0">Projects</h2>
+      </div>
+      <p class="projects-meta">
+        Live from <a href="https://github.com/brycegardner90" target="_blank" rel="noopener">GitHub</a> · Updates automatically
+      </p>
+    </div>
+    <div class="project-grid" id="project-grid">
+      <!-- skeletons shown while loading -->
+      <div class="project-card-skeleton"><div class="skeleton short"></div><div class="skeleton tall"></div><div class="skeleton short"></div></div>
+      <div class="project-card-skeleton"><div class="skeleton short"></div><div class="skeleton tall"></div><div class="skeleton short"></div></div>
+      <div class="project-card-skeleton"><div class="skeleton short"></div><div class="skeleton tall"></div><div class="skeleton short"></div></div>
+      <div class="project-card-skeleton"><div class="skeleton short"></div><div class="skeleton tall"></div><div class="skeleton short"></div></div>
+      <div class="project-card-skeleton"><div class="skeleton short"></div><div class="skeleton tall"></div><div class="skeleton short"></div></div>
+      <div class="project-card-skeleton"><div class="skeleton short"></div><div class="skeleton tall"></div><div class="skeleton short"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label">Experience</p>
+    <h2 class="section-title">Where I've built my foundation</h2>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dates">2021 – Present</div>
+        <div class="tl-content">
+          <div class="tl-role">Independent Study &amp; Full-Time Parent</div>
+          <div class="tl-org">Self-directed · Cumming, GA</div>
+          <div class="tl-desc">Completed Google Data Analytics Certificate (7 courses). Built a portfolio of independent analytics projects using Python, SQL, SQLite, Tableau, and Power BI. Managed household budgeting, scheduling, and financial planning.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dates">2016 – 2021</div>
+        <div class="tl-content">
+          <div class="tl-role">Bartender &amp; Server</div>
+          <div class="tl-org">Kona Grill · Alpharetta, GA</div>
+          <div class="tl-desc">Upscale casual dining with wine, sushi, and rotating scratch kitchen menu. Frequent closing lead — end-of-shift reporting, cash reconciliation, and operational standards enforcement.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dates">2014 – 2016</div>
+        <div class="tl-content">
+          <div class="tl-role">Server → Bartender</div>
+          <div class="tl-org">On the Border · Alpharetta, GA</div>
+          <div class="tl-desc">High-volume bar service including guest orders, service bar coordination, and batch drink production. Informal closing lead overseeing end-of-night coordination and server performance standards.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dates">2008 – 2013</div>
+        <div class="tl-content">
+          <div class="tl-role">First Assistant Manager</div>
+          <div class="tl-org">Carmike Cinemas · Athens, GA (promoted from Snellville, GA)</div>
+          <div class="tl-desc">Advanced through four roles: Floor Staff → Shift Leader → 2nd Assistant Manager → 1st Assistant Manager. Digital projectionist responsible for downloading, sequencing, and distributing film packages. Managed scheduling for 30+ staff, Excel-based inventory tracking, building maintenance, and full daily operations in the GM's absence.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Let's work together</h2>
+    <p class="section-body">Open to data analyst, business analyst, and financial analyst roles — remote, hybrid, or within 30 minutes of Atlanta. Happy to talk through any of my projects in detail.</p>
+    <div class="contact-links">
+      <a href="mailto:brycegardner90@gmail.com" class="contact-link">✉️ brycegardner90@gmail.com</a>
+      <a href="tel:7702869199" class="contact-link">📞 (770) 286-9199</a>
+      <a href="https://linkedin.com/in/bryce-gardner-16a889183" target="_blank" rel="noopener" class="contact-link">💼 LinkedIn</a>
+      <a href="https://github.com/brycegardner90" target="_blank" rel="noopener" class="contact-link">🐙 GitHub</a>
+      <a href="https://public.tableau.com/app/profile/bryce.gardner" target="_blank" rel="noopener" class="contact-link">📊 Tableau Public</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Bryce Gardner · Atlanta, GA ·
+  <span id="footer-repos"></span>
+</footer>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────────────────────
+  const GITHUB_USER = 'brycegardner90';
+
+  // RESUME: Replace this URL once you upload your PDF to GitHub.
+  // Format: https://raw.githubusercontent.com/brycegardner90/REPO/main/FILE.pdf
+  const RESUME_URL = '';   // <-- paste your raw GitHub PDF URL here
+
+  // Repos to hide (non-portfolio, config-only, etc.) — add names as needed
+  const HIDDEN_REPOS = [];
+  // ────────────────────────────────────────────────────────────────────────────
+
+  // Wire up resume button
+  const resumeBtn = document.getElementById('resume-btn');
+  if (RESUME_URL) {
+    resumeBtn.href = RESUME_URL;
+  } else {
+    resumeBtn.addEventListener('click', e => {
+      e.preventDefault();
+      alert('Resume PDF coming soon! Check back shortly.');
+    });
+  }
+
+  // Pretty-print repo names: "saas-churn-analysis" → "SaaS Churn Analysis"
+  function prettifyName(name) {
+    return name
+      .replace(/-/g, ' ')
+      .replace(/\b(saas|sql|mrr|nfl|api)\b/gi, s => s.toUpperCase())
+      .replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  // Detect a Tableau Public URL in the description
+  function extractTableauUrl(desc) {
+    if (!desc) return null;
+    const m = desc.match(/https?:\/\/public\.tableau\.com\/\S+/);
+    return m ? m[0].replace(/[,.)]+$/, '') : null;
+  }
+
+  // Language → display label map
+  const LANG_LABELS = {
+    'Python': 'Python',
+    'Jupyter Notebook': 'Jupyter',
+    null: null,
+  };
+
+  function renderSkeletons() {
+    const grid = document.getElementById('project-grid');
+    grid.innerHTML = Array(6).fill(0).map(() =>
+      `<div class="project-card-skeleton">
+        <div class="skeleton short"></div>
+        <div class="skeleton tall"></div>
+        <div class="skeleton short"></div>
+      </div>`
+    ).join('');
+  }
+
+  function renderError() {
+    document.getElementById('project-grid').innerHTML =
+      `<div class="projects-error" style="grid-column:1/-1">
+        Unable to load projects from GitHub right now.<br>
+        <a href="https://github.com/brycegardner90" target="_blank" rel="noopener" style="color:var(--teal)">View all repos directly on GitHub →</a>
+      </div>`;
+  }
+
+  function renderProjects(repos) {
+    const grid = document.getElementById('project-grid');
+
+    const visible = repos
+      .filter(r => !r.fork && !HIDDEN_REPOS.includes(r.name))
+      .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+
+    // Update stat strip
+    const statEl = document.getElementById('stat-repos');
+    if (statEl) statEl.textContent = visible.length;
+
+    // Update footer
+    const footerEl = document.getElementById('footer-repos');
+    if (footerEl) footerEl.textContent = `${visible.length} public repos · auto-updated via GitHub API`;
+
+    if (!visible.length) { renderError(); return; }
+
+    grid.innerHTML = visible.map(repo => {
+      const title      = prettifyName(repo.name);
+      const desc       = repo.description || '';
+      const tableauUrl = extractTableauUrl(desc);
+      const cleanDesc  = desc.replace(/https?:\/\/\S+/g, '').trim();
+      const lang       = LANG_LABELS.hasOwnProperty(repo.language)
+                           ? LANG_LABELS[repo.language]
+                           : repo.language;
+
+      const descHtml = cleanDesc
+        ? `<p class="has-desc">${cleanDesc}</p>`
+        : `<p>Description coming soon — check the <a href="${repo.html_url}" target="_blank" rel="noopener" style="color:var(--teal)">README on GitHub</a>.</p>`;
+
+      const langTag = lang
+        ? `<span class="tag tag-lang">${lang}</span>`
+        : '';
+
+      const dashLink = tableauUrl
+        ? `<a href="${tableauUrl}" target="_blank" rel="noopener">Dashboard ↗</a>`
+        : '';
+
+      const updatedDate = new Date(repo.pushed_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+      return `
+        <div class="project-card">
+          <h3>${title}</h3>
+          ${descHtml}
+          <div class="tag-row">
+            ${langTag}
+            <span class="tag" style="background:#f0f4f0;color:#3a5a3a">Updated ${updatedDate}</span>
+          </div>
+          <div class="project-links">
+            <a href="${repo.html_url}" target="_blank" rel="noopener">GitHub ↗</a>
+            ${dashLink}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // Fetch from GitHub API
+  async function loadProjects() {
+    try {
+      const res = await fetch(
+        `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=pushed`,
+        { headers: { 'Accept': 'application/vnd.github.v3+json' } }
+      );
+      if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+      const repos = await res.json();
+      renderProjects(repos);
+    } catch (err) {
+      console.warn('GitHub API error:', err);
+      renderError();
+    }
+  }
+
+  loadProjects();
+</script>
+
+</body>
+</html>
